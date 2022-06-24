@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="pink text-light" >
+    <h1 class="fs-1"><i class="fa-solid fa-earth-americas"></i> 年パスドットコム in USJ</h1>
+    <p>年パスドットコムはUSJの年パスを持っている人同士を結ぶ、掲示板です。</p>
+</div>
+
+<div>
+    <form action="/result" method="post">
+        <div class="top">
+        <div>
+            <label for="passdate">年パスいつまで？</label>
+            <input type="date" name="passdate" id="passdate" required>
+        </div>
+        <div>
+            <label for="name">ニックネームは？</label>
+            <input type="text" name="name" id="name" placeholder="例：タニエス" required>
+        </div>
+        <div>
+            <label for="twitter">twitterのIDは？</label>
+            <input type="text" name="twitter" id="twitter" placeholder="例：@momogakupro" required>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary" value="OK登録!">
+        </div>
+    </div>
+
+    </form>
+    <form>
+        <div class="mb-3">
+          <label for="passdate" class="form-label">年パスいつまで？</label>
+          <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div>
+<div>
+    {% block body %}
+        <form action="" method="post">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">投稿日</th>
+                        <th scope="col">ニックネーム</th>
+                        <th scope="col">twitter</th>
+                        <th scope="col">年パスは</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for th in lines  %}
+                    <tr>
+                        <td>{{ th.pub_date.date() }}</td>
+                        <td>{{ th.name }}</td> 
+                       <td> <a href="https://twitter.com/{{ th.twitter }}/">{{ th.twitter }}</a></td>
+                        <td>{{ th.passdate.date() }}まで</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </form>
+    {% endblock %}
+
+
+{% endblock  %}
+ 
